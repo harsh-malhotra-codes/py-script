@@ -12,6 +12,24 @@ if not os.path.exists('ips_log.txt'):
 
 @app.route('/')
 def home():
+    # Return the main page with a button
+    return """
+    <html>
+    <head><title>Welcome</title></head>
+    <body>
+    <h1>Welcome to Our Website</h1>
+    <p>Thank you for visiting! This is a demonstration website.</p>
+    <p>Click the button below to participate in our visitor tracking demo:</p>
+    <form action="/capture" method="post">
+        <button type="submit" style="padding: 10px 20px; font-size: 16px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Track My Visit</button>
+    </form>
+    <p>Learn more about web development at: <a href="https://example.com">Web Basics</a></p>
+    </body>
+    </html>
+    """
+
+@app.route('/capture', methods=['POST'])
+def capture():
     # Get visitor's IP address
     ip = request.remote_addr
     user_agent = request.headers.get('User-Agent', 'Unknown')
@@ -29,14 +47,21 @@ def home():
         f.write(log_entry + '\n')
     print(log_entry)  # Also print to console for Render logs
 
-    # Return a response (can be disguised)
-    return """
+    # Return confirmation page
+    return f"""
     <html>
-    <head><title>Welcome</title></head>
+    <head><title>Thank You</title></head>
     <body>
-    <h1>Welcome to Our Website</h1>
-    <p>Thank you for visiting! This is a demonstration website.</p>
-    <p>Learn more about web development at: <a href="https://example.com">Web Basics</a></p>
+    <h1>Thank You!</h1>
+    <p>Your visit has been recorded in our demo log.</p>
+    <p><strong>Captured Details:</strong></p>
+    <ul>
+        <li>Timestamp: {timestamp}</li>
+        <li>Your IP: {ip}</li>
+        <li>Server IP: {server_ip}</li>
+        <li>User Agent: {user_agent}</li>
+    </ul>
+    <p><a href="/">Back to Home</a></p>
     </body>
     </html>
     """
