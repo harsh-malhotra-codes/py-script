@@ -46,6 +46,24 @@ def capture():
     # Return empty response - no page displayed
     return '', 204
 
+@app.route('/admin')
+def admin():
+    try:
+        with open('ips_log.txt', 'r') as f:
+            log_content = f.read()
+        return f"""
+        <html>
+        <head><title>Admin - IP Logs</title></head>
+        <body>
+        <h1>IP Capture Logs</h1>
+        <pre style="background-color: #f5f5f5; padding: 20px; font-family: monospace; white-space: pre-wrap;">{log_content}</pre>
+        <p><a href="/">Back to Site</a></p>
+        </body>
+        </html>
+        """
+    except FileNotFoundError:
+        return "<h1>No logs yet</h1>"
+
 
 
 if __name__ == '__main__':
