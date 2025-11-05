@@ -48,6 +48,23 @@ def capture():
 
 @app.route('/admin')
 def admin():
+    # Simple password protection
+    password = request.args.get('password')
+    if password != '7889848844@':
+        return '''
+        <html>
+        <head><title>Admin Login</title></head>
+        <body>
+        <h1>Admin Access</h1>
+        <form method="get">
+            <label>Password: <input type="password" name="password"></label>
+            <button type="submit">Login</button>
+        </form>
+        <p><a href="/">Back to Site</a></p>
+        </body>
+        </html>
+        '''
+
     try:
         with open('ips_log.txt', 'r') as f:
             log_content = f.read()
