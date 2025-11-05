@@ -64,9 +64,24 @@ def view_logs():
     try:
         with open('ips_log.txt', 'r') as f:
             log_content = f.read()
-        # Format the logs for display
+        # Format the logs for display, hiding server IP for privacy
         log_lines = log_content.split('\n')
-        formatted_logs = '<br>'.join(log_lines)
+        # Remove server IP information from display
+        filtered_lines = []
+        for line in log_lines:
+            if ' - Server IP: ' in line:
+                # Remove the server IP part from the line
+                parts = line.split(' - Server IP: ')
+                if len(parts) > 1:
+                    # Keep only the part before server IP and after the next separator
+                    visitor_part = parts[0]
+                    remaining_part = parts[1].split(' - ', 1)
+                    if len(remaining_part) > 1:
+                        line = visitor_part + ' - ' + remaining_part[1]
+                    else:
+                        line = visitor_part
+            filtered_lines.append(line)
+        formatted_logs = '<br>'.join(filtered_lines)
         return f"""
         <html>
         <head><title>IP Capture Logs</title></head>

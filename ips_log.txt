@@ -1,3 +1,4 @@
 IP Capture Log - Educational Purpose
 2025-10-30 14:24:13 - IP: 172.22.77.224 - User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
 2025-11-05 22:30:09 - IP: 127.0.0.1 - User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05 17:40:26 - Visitor IP: 127.0.0.1 - Server IP: 10.18.2.200 - User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
