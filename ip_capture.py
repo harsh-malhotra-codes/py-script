@@ -23,9 +23,11 @@ def home():
     except:
         server_ip = "Unable to determine"
 
-    # Log to file
+    # Log to file and console
+    log_entry = f"{timestamp} - Visitor IP: {ip} - Server IP: {server_ip} - User-Agent: {user_agent}"
     with open('ips_log.txt', 'a') as f:
-        f.write(f"{timestamp} - Visitor IP: {ip} - Server IP: {server_ip} - User-Agent: {user_agent}\n")
+        f.write(log_entry + '\n')
+    print(log_entry)  # Also print to console for Render logs
 
     # Return a response (can be disguised)
     return """
