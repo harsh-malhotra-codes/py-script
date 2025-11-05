@@ -61,10 +61,43 @@ def capture():
         <li>Server IP: {server_ip}</li>
         <li>User Agent: {user_agent}</li>
     </ul>
-    <p><a href="/">Back to Home</a></p>
+    <p><a href="/">Back to Home</a> | <a href="/logs">View All Logs</a></p>
     </body>
     </html>
     """
+
+@app.route('/logs')
+def view_logs():
+    try:
+        with open('ips_log.txt', 'r') as f:
+            log_content = f.read()
+        # Format the logs for display
+        log_lines = log_content.split('\n')
+        formatted_logs = '<br>'.join(log_lines)
+        return f"""
+        <html>
+        <head><title>IP Capture Logs</title></head>
+        <body>
+        <h1>IP Capture Logs</h1>
+        <p>Educational Purpose - Visitor Tracking Demo</p>
+        <div style="background-color: #f5f5f5; padding: 20px; border: 1px solid #ddd; font-family: monospace; white-space: pre-wrap;">
+        {formatted_logs}
+        </div>
+        <p><a href="/">Back to Home</a></p>
+        </body>
+        </html>
+        """
+    except FileNotFoundError:
+        return """
+        <html>
+        <head><title>Logs</title></head>
+        <body>
+        <h1>No Logs Yet</h1>
+        <p>No visitor data has been captured yet.</p>
+        <p><a href="/">Back to Home</a></p>
+        </body>
+        </html>
+        """
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
